@@ -1,0 +1,13 @@
+@import "src/components/variables.scss";
+
+.footer {
+  background: #3f4d5f;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+.divider-foot {
+  width: 100%;
+}

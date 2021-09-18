@@ -1,0 +1,10 @@
+@import "src/components/variables.scss";
+
+.header {
+  background: #000000;
+  color: #fff;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+}

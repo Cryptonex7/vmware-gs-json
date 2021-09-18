@@ -1,0 +1,9 @@
+@import "src/components/variables.scss";
+
+.below-nav {
+  padding-top: calc(#{$header-height} + 5px);
+}
+
+.main-content {
+  margin-left: $sidebar-width;
+}
