@@ -9,7 +9,7 @@ import Footer from "../Footer";
 const ScaffoldHOC = (WrapComponent: React.FC, title: string) => {
   const HocContent = (props: any) => {
     const { history } = props;
-
+  
     useEffect(() => {
       if (localStorage.getItem("loginState") === "") {
         history.push("/auth");
@@ -18,7 +18,7 @@ const ScaffoldHOC = (WrapComponent: React.FC, title: string) => {
 
     return (
       <div className="" cds-layout="vertical align:stretch">
-        <Header title={"VMware Clarity React"} />
+        <Header title={"VMware LogoPro"} />
         <div
           cds-layout="horizontal align:vertical-stretch wrap:none"
           className="below-nav"
@@ -27,12 +27,12 @@ const ScaffoldHOC = (WrapComponent: React.FC, title: string) => {
 
           <div cds-layout="vertical align:stretch">
             <div className="main-content">
-              <div cds-layout="vertical gap:md p:lg">
+              <div cds-layout="vertical gap:md p-x:lg">
                 {/* wrapped component */}
                 <WrapComponent />
               </div>
             </div>
-            <Footer>Footer</Footer>
+            {/* <Footer>Footer</Footer> */}
           </div>
         </div>
       </div>

@@ -9,6 +9,14 @@ import { createBrowserHistory } from "history";
 
 const history = createBrowserHistory();
 
+
+if (window.location.pathname === "/") {
+  document.body.removeAttribute("cds-theme");
+} else {
+  if (document.body.getAttribute("cds-theme") !== "dark")
+    document.body.setAttribute("cds-theme", "dark");
+}
+
 ReactDOM.render(
   <React.StrictMode>
     <Router history={history}>

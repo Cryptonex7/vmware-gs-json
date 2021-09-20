@@ -2,6 +2,7 @@ import { Switch, Route } from "react-router-dom";
 import "./App.css";
 import AppRoutes from "./routes";
 import ScaffoldHOC from "./components/ScaffoldHOC";
+
 function App() {
   return (
     <>
@@ -10,7 +11,9 @@ function App() {
           <Route
             key={route.path}
             path={route.path}
-            component={ScaffoldHOC(route.component, route.title)}
+            component={
+              route.path === "/" ? route.component : ScaffoldHOC(route.component, route.title)
+            }
           />
         ))}
       </Switch>

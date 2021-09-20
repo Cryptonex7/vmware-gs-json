@@ -2,6 +2,9 @@ import "@cds/core/icon/register.js";
 import "@cds/core/divider/register.js";
 import "./styles.scss";
 
+import { ClarityIcons, userIcon } from "@cds/core/icon";
+ClarityIcons.addIcons(userIcon);
+
 interface Props {
   title: string;
   icon?: string;
@@ -12,12 +15,10 @@ const Sidebar: React.FC<Props> = (props: Props) => {
   return (
     <>
       <nav className="sidenav" cds-layout="p:md">
-        {props.title && <h3 className="sidenav__title">{props.title}</h3>}
+        <cds-icon shape="user" badge="success"></cds-icon>&nbsp;&nbsp;
+        {localStorage.getItem("name")}
       </nav>
-      <cds-divider
-        class="divider-side"
-        orientation="vertical"
-      ></cds-divider>
+      <cds-divider class="divider-side" orientation="vertical"></cds-divider>
     </>
   );
 };

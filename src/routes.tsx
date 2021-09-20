@@ -1,4 +1,6 @@
-import TestFC from "./components/_TestFC";
+import AuthPage from "./pages/AuthPage";
+import WaitingPage from "./pages/WaitingPage";
+import GamePage from "./pages/GamePage";
 
 export type Route = {
   path: string;
@@ -7,10 +9,21 @@ export type Route = {
 };
 
 const AppRoutes: Route[] = [
+  // ! MAKE SURE: to keep Auth Route at the end
   {
-    path: "/auth",
+    path: "/waiting",
     title: "LogoPro",
-    component: () => <h1>Hello Clarity</h1>,
+    component: WaitingPage,
+  },
+  {
+    path: "/game",
+    title: "LogoPro",
+    component: GamePage,
+  },
+  {
+    path: "/",
+    title: "LogoPro",
+    component: AuthPage,
   },
 ];
 

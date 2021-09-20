@@ -6,5 +6,11 @@ declare namespace JSX {
     "cds-icon": any;
     "cds-demo": any;
     "cds-divider": any;
+    "cds-form-group";
+    "cds-control-message";
+    "cds-input";
+    "cds-button";
+    "cds-progress-circle";
+    "cds-card";
   }
 }
