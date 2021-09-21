@@ -10,12 +10,15 @@ import { ClarityIcons, vmBugInverseIcon } from "@cds/core/icon";
 import { useState } from "react";
 ClarityIcons.addIcons(vmBugInverseIcon);
 
-interface Props extends RouteComponentProps {}
+interface Props extends RouteComponentProps{
+}
 
 const TestPage: React.FC<Props> = (props: Props) => {
+
+
   return (
-    <div className="">
-      <h1>Hello {sessionStorage.getItem("prouser")}!</h1>{" "}
+    <div className="flex-row full-width full-height">
+      <h1>Thats a Wrap!</h1>
     </div>
   );
 };

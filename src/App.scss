@@ -1,3 +1,6 @@
+@import "src/components/variables.scss";
+
+
 .flex-row {
   display: flex;
   flex-direction: row;
@@ -16,6 +19,10 @@
   justify-content: space-between;
 }
 
+.just-sa {
+  justify-content: space-around;
+}
+
 .align-fs {
   align-items: flex-start;
 }
@@ -24,11 +31,23 @@
   width: 100%;
 }
 
+.full-height {
+  height: calc(100vh - #{$header-height});
+}
+
 .width-60 {
   width: 60%;
 }
 
 .width-40 {
   width: 40%;
+}
+
+.width-50 {
+  width: 50%;
+}
+
+.danger {
+  color: #e74c3c;
 }
 

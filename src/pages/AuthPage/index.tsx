@@ -7,7 +7,7 @@ import axios from "axios";
 import { API_URL } from "../../constants";
 
 import { withRouter, RouteComponentProps } from "react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TextField from "../../components/TextField";
 
 import { ClarityIcons, vmBugInverseIcon } from "@cds/core/icon";
@@ -19,7 +19,20 @@ const AuthPage: React.FC<Props> = (props: Props) => {
   document.body.removeAttribute("cds-theme");
 
   const [name, setName] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
+  const handleKeyPress = (event: any) => {
+    if (event.key === "Enter") {
+      onEnter();
+    }
+  };
+
+  useEffect(() => {
+    if (sessionStorage.getItem("prouser") !== null) {
+      document.body.setAttribute("cds-theme", "dark");
+      props.history.push("/waiting");
+    }
+  }, []);
   const onEnter = async () => {
     const res = await axios.post(API_URL + "/api/login", {
       name: name,
@@ -27,11 +40,16 @@ const AuthPage: React.FC<Props> = (props: Props) => {
     });
 
     if (res.data.id) {
-      localStorage.setItem("name", name);
+      sessionStorage.setItem("prouser", name);
       document.body.setAttribute("cds-theme", "dark");
       props.history.push("/waiting");
+    } else {
+      if (res.data.id === null) {
+        setError("Username Already Taken");
+      } else {
+        setError("Unknown Error, Please Try again!");
+      }
     }
-
   };
 
   return (
@@ -49,9 +67,11 @@ const AuthPage: React.FC<Props> = (props: Props) => {
         </div>
         <div className="form-container">
           <TextField
+            onKeyPress={handleKeyPress}
             onChange={(e: any) => setName(e.target.value)}
             placeholder="Please Enter Your Name"
             message="This name will be used to put you on the leaderboard - make sure you only use your name, and not use your colleague's as a proxy :)"
+            error={error}
           />
 
           <br />

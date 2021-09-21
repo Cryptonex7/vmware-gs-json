@@ -2,13 +2,35 @@
 
 .wrapper {
   width: 100%;
-  height: calc(100vh - #{$header-height});
+  height: calc(100vh - #{$header-height} - 75px);
 }
 
 .logo-display {
-  width: 50%;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .media {
   background-color: white;
+}
+
+.levelBadge{
+  height: 50px;
+  background-color: #475963;
+  border-radius: 50%;
+}
+
+.answer-sheet {
+  width: 100%;
+  padding: 10px;
+}
+
+.status-container{
+  height: 60px;
+  max-height: 60px;
+  padding: 5px;
+}
+
+.status-text {
+  font-size: 1.5em;
 }

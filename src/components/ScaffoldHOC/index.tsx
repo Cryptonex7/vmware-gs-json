@@ -1,17 +1,42 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import "./styles.scss";
 
 import Header from "../Header";
 import Sidebar from "../Sidebar";
 import Footer from "../Footer";
+import axios from "axios";
+import { API_URL } from "../../constants";
 
-const ScaffoldHOC = (WrapComponent: React.FC, title: string) => {
+interface WrapProps {
+  getLeaderboard: any;
+}
+
+const ScaffoldHOC = (WrapComponent: React.FC<WrapProps>, title: string) => {
   const HocContent = (props: any) => {
     const { history } = props;
-  
+    const [users, setUsers] = useState([]);
+
+    const getLeaderboard = async () => {
+      const response = await axios.get(API_URL + "/api/leaderboard");
+      console.log(response);
+      setUsers(response.data);
+    };
     useEffect(() => {
-      if (localStorage.getItem("loginState") === "") {
+      getLeaderboard();
+      const x = setInterval(function () {
+        getLeaderboard();
+      }, 20000);
+
+      return () => {
+        clearInterval(x);
+      };
+    }, []);
+    useEffect(() => {
+      if (
+        sessionStorage.getItem("prouser") === "" ||
+        sessionStorage.getItem("prouser") === null
+      ) {
         history.push("/auth");
       }
     }, []);
@@ -23,13 +48,13 @@ const ScaffoldHOC = (WrapComponent: React.FC, title: string) => {
           cds-layout="horizontal align:vertical-stretch wrap:none"
           className="below-nav"
         >
-          <Sidebar title="SideBar" />
+          <Sidebar title="SideBar" users={users} />
 
           <div cds-layout="vertical align:stretch">
             <div className="main-content">
               <div cds-layout="vertical gap:md p-x:lg">
                 {/* wrapped component */}
-                <WrapComponent />
+                <WrapComponent getLeaderboard={() => getLeaderboard()} />
               </div>
             </div>
             {/* <Footer>Footer</Footer> */}
