@@ -49,6 +49,7 @@
   },
   "devDependencies": {
     "@types/history": "^4.7.9",
-    "@types/react-router-dom": "^5.1.9"
+    "@types/react-router-dom": "^5.1.9",
+    "sass-loader": "^10.2.0"
   }
 }
