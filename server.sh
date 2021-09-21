@@ -1,5 +1,6 @@
 echo "Pulling from git:"
 
+git stash
 git pull 
 
 echo "Building the App:"
