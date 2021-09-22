@@ -74,15 +74,16 @@ const TestPage: React.FC<Props> = (props: Props) => {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
+          <XAxis dataKey="name" tick={{ stroke: "white", strokeWidth: 1 }} />
+          <YAxis tick={{ stroke: "white", strokeWidth: 1 }} />
+          <Tooltip contentStyle = {{backgroundColor: "#0F161A"}} />
           <Legend />
           <ReferenceLine
             x="L1 - 0"
             stroke="yellow"
             label="Level 1"
             strokeWidth="10"
+            className="white"
           />
           <ReferenceLine
             x="L2 - 0"
@@ -95,15 +96,20 @@ const TestPage: React.FC<Props> = (props: Props) => {
             stroke="red"
             label="Level 3"
             strokeWidth="10"
+            color="white"
           />
           {users.map((user: string, idx: number) => {
-            return user !== "proadmin" && <Line
-              type="monotone"
-              dataKey={user}
-              stroke={colors[idx % colors.length]}
-              activeDot={{ r: 8 }}
-              strokeWidth={4}
-            />
+            return (
+              user !== "proadmin" && (
+                <Line
+                  type="monotone"
+                  dataKey={user}
+                  stroke={colors[idx % colors.length]}
+                  activeDot={{ r: 8 }}
+                  strokeWidth={4}
+                />
+              )
+            );
           })}
         </LineChart>
       </ResponsiveContainer>
