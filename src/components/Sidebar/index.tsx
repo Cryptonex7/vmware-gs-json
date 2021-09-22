@@ -32,15 +32,15 @@ const Sidebar: React.FC<Props> = (props: Props) => {
   return (
     <>
       <div className="sidenav" cds-layout="p:md">
-        {props.users?.map((user: any, idx: number) => (
-          <div className="leaderrow flex-row just-sb full-width">
+        {props.users?.map((user: any, idx: number) => 
+          {return user.name !== "proadmin" && <div className="leaderrow flex-row just-sb full-width">
             <span className="prousername">
               <cds-icon shape="user" badge={user.ready ? "success" : "danger"} size="md"></cds-icon>#
               {idx + 1}&nbsp;&nbsp;&nbsp;{nameshorter(user.name)}
             </span>
             <span className="prousername">{user.score}</span>
-          </div>
-        ))}
+          </div>}
+        )}
       </div>
       <cds-divider class="divider-side" orientation="vertical"></cds-divider>
     </>

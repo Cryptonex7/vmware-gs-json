@@ -42,18 +42,17 @@ const colors = [
 ];
 
 const TestPage: React.FC<Props> = (props: Props) => {
-  const [scoreData, setScoreData] = useState<any>({});
+  const [scoreData, setScoreData] = useState<any>([]);
   const [users, setUsers] = useState<any>([]);
 
   
   useEffect(() => {
-    const scoreData = JSON.parse(sessionStorage.getItem("scoreData") || "{}");
-    if(scoreData.length > 0)  {
-      const users = Object.keys(scoreData[0]).filter(s => s !== "name");
-      setUsers(users);
-    }
     setInterval(() => {
-      const scoreData = JSON.parse(sessionStorage.getItem("scoreData") || "{}");
+      const scoreData = JSON.parse(sessionStorage.getItem("scoreData") || "[]");
+      if (scoreData.length > 0) {
+        const users = Object.keys(scoreData[scoreData.length - 1]).filter((s) => s !== "name");
+        setUsers(users);
+      }
       setScoreData(scoreData);
       console.log(scoreData);
     }, 2000);
@@ -97,14 +96,15 @@ const TestPage: React.FC<Props> = (props: Props) => {
             label="Level 3"
             strokeWidth="10"
           />
-          {users.map((user: string, idx: number) => (
-            <Line
+          {users.map((user: string, idx: number) => {
+            return user !== "proadmin" && <Line
               type="monotone"
               dataKey={user}
               stroke={colors[idx % colors.length]}
               activeDot={{ r: 8 }}
+              strokeWidth={4}
             />
-          ))}
+          })}
         </LineChart>
       </ResponsiveContainer>
     </div>

@@ -91,7 +91,7 @@ const TestPage: React.FC<Props> = (props: Props) => {
       setIsCorrect(true);
       const res = await axios.post(API_URL + "/api/score", {
         name: sessionStorage.getItem("prouser"),
-        score: Math.floor((100 + (parseInt(level) / 10)) * (50 - MAX_TIME + time)),
+        score: Math.floor((1 + (parseInt(level) / 10)) * (50 - MAX_TIME + time)),
       });
     } else setWrongAnswer(true);
   };
