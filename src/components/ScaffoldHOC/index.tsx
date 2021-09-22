@@ -20,7 +20,7 @@ const ScaffoldHOC = (WrapComponent: React.FC<WrapProps>, title: string) => {
     const getLeaderboard = async () => {
       const response = await axios.get(API_URL + "/api/leaderboard");
       console.log(response);
-      setUsers(response.data.filter((user: any)=> user.username !== "proadmin"));
+      setUsers(response.data.filter((user: any)=> user.name !== "proadmin"));
     };
     useEffect(() => {
       getLeaderboard();
