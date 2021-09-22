@@ -1,7 +1,3 @@
-echo "Killing running task:"
-
-pm2 del logo-pro
-
 echo "Pulling from git:"
 
 git stash
