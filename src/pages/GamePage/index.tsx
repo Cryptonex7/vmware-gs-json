@@ -57,6 +57,29 @@ const TestPage: React.FC<Props> = (props: Props) => {
     }
   };
 
+  const getAndStoreScores = async (level: string, index: number) => {
+    const response = await axios.get(API_URL + "/api/leaderboard");
+    let scoreData: any[] = [];
+    if (sessionStorage.getItem("scoreData") !== null) {
+      scoreData = JSON.parse(sessionStorage.getItem("scoreData") || "[]");
+    }
+    // const users = response.data.map((user: any) => user.name);
+    
+    const datapoint: any = {
+      name: "L" + level + " - " + index,
+    };
+    response.data.map((user: { name: string; score: number }) => {
+      datapoint[user.name] = user.score;
+    });
+    
+    scoreData.push(datapoint);
+    
+
+
+    console.log("Score Data: ", scoreData);
+    sessionStorage.setItem("scoreData", JSON.stringify(scoreData));
+  };
+
   const onSubmit = async () => {
     console.log(answer);
     if (
@@ -111,6 +134,7 @@ const TestPage: React.FC<Props> = (props: Props) => {
         if (!revealation) {
           setRevealation(true);
           props.getLeaderboard();
+          getAndStoreScores(level, index);
           setTime(5);
         } else {
           setIsCorrect(false);
