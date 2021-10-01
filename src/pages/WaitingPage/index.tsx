@@ -6,71 +6,49 @@ import "@cds/core/button/register.js";
 import "@cds/core/progress-circle/register.js";
 
 import { withRouter, RouteComponentProps } from "react-router";
+import ReactJson from "react-json-view";
 
 import { ClarityIcons, vmBugInverseIcon } from "@cds/core/icon";
 import { useEffect, useState } from "react";
-import axios from "axios";
-import { API_URL } from "../../constants";
 ClarityIcons.addIcons(vmBugInverseIcon);
 
 interface Props extends RouteComponentProps {
-  getLeaderboard: any;
+  getSpreadsheet: any;
+  json?: any;
 }
 
 const WaitingPage: React.FC<Props> = (props: Props) => {
-  const [ready, setReady] = useState(false);
+  document.body.setAttribute("cds-theme", "dark");
 
-  const onReady = async () => {
-    const res = await axios.post(API_URL + "/api/ready", {
-      name: sessionStorage.getItem("prouser"),
-      score: null,
-    });
-
-    setReady(res.data.ready);
-  };
-
-  const checkForStart = async () => {
-    const res = await axios.get(`${API_URL}/api/status/start`);
-    console.log(res);
-    if (res.data?.value === "true") {
-      props.history.push("/game");
-    }
+  const waitAndGetJSON = async () => {
+    const response = await props.getSpreadsheet(
+      "1eACv1lASyY-ZT3dLU94qTrdz8-TLDY_kezfmRe5ydjc",
+      "AIzaSyCQau8PQIx8TXwDna_J_CU0OE7Uu4FXvFQ"
+    );
   };
 
   useEffect(() => {
-    const x = setInterval(function () {
-      checkForStart();
-      props.getLeaderboard();
-    }, 2000);
-
-    return () => {
-      clearInterval(x);
-    };
+    document.body.setAttribute("cds-theme", "dark");
   }, []);
 
+  // curl \
+  // 'https://sheets.googleapis.com/v4/spreadsheets/1eACv1lASyY-ZT3dLU94qTrdz8-TLDY_kezfmRe5ydjc/values/A%3Az?key=[YOUR_API_KEY]' \
+  // --header 'Authorization: Bearer [YOUR_ACCESS_TOKEN]' \
+  // --header 'Accept: application/json' \
+  // --compressed
+
   return (
-    <div className="wrapper">
-      <div className="waiting flex-col">
-        <h1>Hello {sessionStorage.getItem("prouser")}!</h1>
-        <h2 className="text">Waiting for Admin to Start...</h2>
-        <div className="spinner">
-          <cds-progress-circle size="xl" status="info"></cds-progress-circle>
-        </div>
-        <br />
-        <br />
-        {!ready && (
-          <>
-            <h1 className="danger">
-              WARNING: You have NOT marked yourself ready!
-            </h1>
-            <h2 className="danger">
-              Please make sure to do so by clicking on the button below.
-            </h2>
-            <cds-button onClick={onReady} status="warning">
-              CLick Here Mark Yourself Ready to Participate
-            </cds-button>
-          </>
-        )}
+    <div className="wrapper full-width full-height">
+      <div className="waiting full-width full-height">
+        <ReactJson
+          src={props.json}
+          iconStyle="square"
+          displayObjectSize={true}
+          theme="brewer"
+          name={false}
+          indentWidth={4}
+          displayDataTypes={false}
+        />
       </div>
     </div>
   );

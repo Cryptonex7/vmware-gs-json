@@ -45,12 +45,13 @@ const TestPage: React.FC<Props> = (props: Props) => {
   const [scoreData, setScoreData] = useState<any>([]);
   const [users, setUsers] = useState<any>([]);
 
-  
   useEffect(() => {
     setInterval(() => {
-      const scoreData = JSON.parse(sessionStorage.getItem("scoreData") || "[]");
+      const scoreData = JSON.parse(localStorage.getItem("scoreData") || "[]");
       if (scoreData.length > 0) {
-        const users = Object.keys(scoreData[scoreData.length - 1]).filter((s) => s !== "name");
+        const users = Object.keys(scoreData[scoreData.length - 1]).filter(
+          (s) => s !== "name"
+        );
         setUsers(users);
       }
       setScoreData(scoreData);
@@ -76,7 +77,7 @@ const TestPage: React.FC<Props> = (props: Props) => {
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" tick={{ stroke: "white", strokeWidth: 1 }} />
           <YAxis tick={{ stroke: "white", strokeWidth: 1 }} />
-          <Tooltip contentStyle = {{backgroundColor: "#0F161A"}} />
+          <Tooltip contentStyle={{ backgroundColor: "#0F161A" }} />
           <Legend />
           <ReferenceLine
             x="L1 - 0"

@@ -15,7 +15,7 @@ interface Props extends RouteComponentProps {}
 const TestPage: React.FC<Props> = (props: Props) => {
   return (
     <div className="">
-      <h1>Hello {sessionStorage.getItem("prouser")}!</h1>{" "}
+      <h1>Hello {localStorage.getItem("prouser")}!</h1>{" "}
     </div>
   );
 };

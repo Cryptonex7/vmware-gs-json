@@ -7,40 +7,46 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { API_URL } from "../../constants";
 import { withRouter, RouteComponentProps } from "react-router";
+import TextField from "../TextField";
+import { CdsButton } from "@cds/core/button/button.element";
 
+import "@cds/core/button/register.js";
 ClarityIcons.addIcons(userIcon);
 
 interface Props extends RouteComponentProps {
   title: string;
   icon?: string;
   users?: any;
-  getLeaderboard?: any;
+  getSpreadsheet?: any;
 }
 
 const Sidebar: React.FC<Props> = (props: Props) => {
+  const [spreadsheetId, setSpreadsheetId] = useState("");
 
-  const nameshorter = (name: string) => {
-    if(name.length > 15) {
-      const fname = name.split(" ");
-      return fname[0].substr(0, 15) + "...";
-    } else {
-      return name;
-    }
+  const handleKeyPress = (event: any) => {
+    onSubmit();
   };
 
-  
+  const onSubmit = () => {
+    props.getSpreadsheet(spreadsheetId);
+  };
+
+  useEffect(() => {}, []);
+
   return (
     <>
       <div className="sidenav" cds-layout="p:md">
-        {props.users?.map((user: any, idx: number) => 
-          {return user.name !== "proadmin" && <div className="leaderrow flex-row just-sb full-width">
-            <span className="prousername">
-              <cds-icon shape="user" badge={user.ready ? "success" : "danger"} size="md"></cds-icon>#
-              {idx + 1}&nbsp;&nbsp;&nbsp;{nameshorter(user.name)}
-            </span>
-            <span className="prousername">{user.score}</span>
-          </div>}
-        )}
+        <TextField
+          label="Spreadsheet ID"
+          placeholder="Google Sheet Spreadsheet ID"
+          message="You can find your Spreadsheet ID in the URL of your google sheet."
+          onChange={(e: any) => setSpreadsheetId(e.target.value)}
+          onKeyPress={handleKeyPress}
+        />
+        <br />
+        <br />
+
+        <cds-button onClick={onSubmit}>Get Spreadsheet</cds-button>
       </div>
       <cds-divider class="divider-side" orientation="vertical"></cds-divider>
     </>

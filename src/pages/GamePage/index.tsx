@@ -29,16 +29,14 @@ interface Props extends RouteComponentProps {
 
 const TestPage: React.FC<Props> = (props: Props) => {
   const MAX_TIME = 15;
-  let indexFromStorage: string | null | number =
-    sessionStorage.getItem("index");
+  let indexFromStorage: string | null | number = localStorage.getItem("index");
   if (indexFromStorage === null) {
     indexFromStorage = 0;
   } else {
     indexFromStorage = parseInt(indexFromStorage);
   }
 
-  let levelFromStorage: string | null | number =
-    sessionStorage.getItem("level");
+  let levelFromStorage: string | null | number = localStorage.getItem("level");
   if (levelFromStorage === null) {
     levelFromStorage = "1";
   }
@@ -60,24 +58,22 @@ const TestPage: React.FC<Props> = (props: Props) => {
   const getAndStoreScores = async (level: string, index: number) => {
     const response = await axios.get(API_URL + "/api/leaderboard");
     let scoreData: any[] = [];
-    if (sessionStorage.getItem("scoreData") !== null) {
-      scoreData = JSON.parse(sessionStorage.getItem("scoreData") || "[]");
+    if (localStorage.getItem("scoreData") !== null) {
+      scoreData = JSON.parse(localStorage.getItem("scoreData") || "[]");
     }
     // const users = response.data.map((user: any) => user.name);
-    
+
     const datapoint: any = {
       name: "L" + level + " - " + index,
     };
     response.data.map((user: { name: string; score: number }) => {
       datapoint[user.name] = user.score;
     });
-    
-    scoreData.push(datapoint);
-    
 
+    scoreData.push(datapoint);
 
     console.log("Score Data: ", scoreData);
-    sessionStorage.setItem("scoreData", JSON.stringify(scoreData));
+    localStorage.setItem("scoreData", JSON.stringify(scoreData));
   };
 
   const onSubmit = async () => {
@@ -90,8 +86,8 @@ const TestPage: React.FC<Props> = (props: Props) => {
       console.log("Correct!");
       setIsCorrect(true);
       const res = await axios.post(API_URL + "/api/score", {
-        name: sessionStorage.getItem("prouser"),
-        score: Math.floor((1 + (parseInt(level) / 10)) * (50 - MAX_TIME + time)),
+        name: localStorage.getItem("prouser"),
+        score: Math.floor((1 + parseInt(level) / 10) * (50 - MAX_TIME + time)),
       });
     } else setWrongAnswer(true);
   };
@@ -104,17 +100,17 @@ const TestPage: React.FC<Props> = (props: Props) => {
       props.history.push("/results");
     } else if (index + 1 === images["level" + level]?.length) {
       setIndex(0);
-      sessionStorage.setItem("index", index.toString());
+      localStorage.setItem("index", index.toString());
       setLevel((parseInt(level) + 1).toString());
-      sessionStorage.setItem("level", level.toString());
+      localStorage.setItem("level", level.toString());
       setTime(10);
     }
     if (time === 0) {
       setIsCorrect(false);
       setWrongAnswer(false);
     }
-    sessionStorage.setItem("level", level.toString());
-    sessionStorage.setItem("index", index.toString());
+    localStorage.setItem("level", level.toString());
+    localStorage.setItem("index", index.toString());
   }, [time, isCorrect, wrongAnswer, index]);
 
   useEffect(() => {
@@ -142,7 +138,7 @@ const TestPage: React.FC<Props> = (props: Props) => {
           props.getLeaderboard();
           setRevealation(false);
           setIndex(index + 1);
-          sessionStorage.setItem("index", index.toString());
+          localStorage.setItem("index", index.toString());
           setTime(MAX_TIME);
         }
       }

@@ -30,7 +30,7 @@ const Header: React.FC<Props> = (props: Props) => {
           {props.title}
         </h2>
       )}
-      {sessionStorage.getItem("prouser") === "proadmin" && (
+      {localStorage.getItem("prouser") === "proadmin" && (
         <cds-button onClick={onStart}>Start</cds-button>
       )}
       <cds-icon
@@ -40,7 +40,7 @@ const Header: React.FC<Props> = (props: Props) => {
         solid
         aria-label="This is an example of an icon of a user completely filled in with the blue, informational color"
       ></cds-icon>{" "}
-      &nbsp; {sessionStorage.getItem("prouser")}
+      &nbsp; {localStorage.getItem("prouser")}
     </header>
   );
 };
