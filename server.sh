@@ -4,7 +4,6 @@ git stash
 git pull 
 
 echo "Building the App:"
-npm install node-sass --unsafe-perms
 npm i
 npm run build
 
