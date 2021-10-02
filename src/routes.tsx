@@ -1,7 +1,5 @@
 import AuthPage from "./pages/AuthPage";
-import WaitingPage from "./pages/WaitingPage";
-import GamePage from "./pages/GamePage";
-import ResultsPage from "./pages/ResultsPage";
+import ConversionPage from "./pages/ConversionPage";
 
 export type Route = {
   path: string;
@@ -12,19 +10,9 @@ export type Route = {
 const AppRoutes: Route[] = [
   // ! MAKE SURE: to keep Auth Route at the end
   {
-    path: "/waiting",
+    path: "/convert",
     title: "LogoPro",
-    component: WaitingPage,
-  },
-  {
-    path: "/game",
-    title: "LogoPro",
-    component: GamePage,
-  },
-  {
-    path: "/results",
-    title: "LogoPro",
-    component: ResultsPage,
+    component: ConversionPage,
   },
   {
     path: "/",

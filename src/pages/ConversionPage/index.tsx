@@ -9,7 +9,7 @@ import { withRouter, RouteComponentProps } from "react-router";
 import ReactJson from "react-json-view";
 
 import { ClarityIcons, vmBugInverseIcon } from "@cds/core/icon";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 ClarityIcons.addIcons(vmBugInverseIcon);
 
 interface Props extends RouteComponentProps {
@@ -20,22 +20,9 @@ interface Props extends RouteComponentProps {
 const WaitingPage: React.FC<Props> = (props: Props) => {
   document.body.setAttribute("cds-theme", "dark");
 
-  const waitAndGetJSON = async () => {
-    const response = await props.getSpreadsheet(
-      "1eACv1lASyY-ZT3dLU94qTrdz8-TLDY_kezfmRe5ydjc",
-      "AIzaSyCQau8PQIx8TXwDna_J_CU0OE7Uu4FXvFQ"
-    );
-  };
-
   useEffect(() => {
     document.body.setAttribute("cds-theme", "dark");
   }, []);
-
-  // curl \
-  // 'https://sheets.googleapis.com/v4/spreadsheets/1eACv1lASyY-ZT3dLU94qTrdz8-TLDY_kezfmRe5ydjc/values/A%3Az?key=[YOUR_API_KEY]' \
-  // --header 'Authorization: Bearer [YOUR_ACCESS_TOKEN]' \
-  // --header 'Accept: application/json' \
-  // --compressed
 
   return (
     <div className="wrapper full-width full-height">

@@ -4,11 +4,8 @@ import "./styles.scss";
 
 import { ClarityIcons, userIcon } from "@cds/core/icon";
 import { useEffect, useState } from "react";
-import axios from "axios";
-import { API_URL } from "../../constants";
 import { withRouter, RouteComponentProps } from "react-router";
 import TextField from "../TextField";
-import { CdsButton } from "@cds/core/button/button.element";
 
 import "@cds/core/button/register.js";
 ClarityIcons.addIcons(userIcon);

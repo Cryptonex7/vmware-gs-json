@@ -37,7 +37,7 @@ const ScaffoldHOC = (WrapComponent: React.FC<WrapProps>, title: string) => {
       ) {
         history.push("/auth");
       }
-    }, []);
+    }, [history]);
 
     return (
       <div className="" cds-layout="vertical align:stretch">
