@@ -1,9 +1,7 @@
 import "@cds/core/icon/register.js";
 import "./styles.scss";
-import axios from "axios";
 
 import { ClarityIcons, vmBugIcon } from "@cds/core/icon";
-import { API_URL } from "../../constants";
 import { withRouter, RouteComponentProps } from "react-router";
 ClarityIcons.addIcons(vmBugIcon);
 
@@ -14,11 +12,6 @@ interface Props extends RouteComponentProps {
 }
 
 const Header: React.FC<Props> = (props: Props) => {
-  const onStart = async () => {
-    const res = await axios.post(API_URL + "/api/status/start");
-    console.log(res.data);
-  };
-
   return (
     <header
       className="header"
@@ -30,9 +23,6 @@ const Header: React.FC<Props> = (props: Props) => {
           {props.title}
         </h2>
       )}
-      {localStorage.getItem("prouser") === "proadmin" && (
-        <cds-button onClick={onStart}>Start</cds-button>
-      )}
       <cds-icon
         shape="user"
         status="info"
@@ -40,7 +30,7 @@ const Header: React.FC<Props> = (props: Props) => {
         solid
         aria-label="This is an example of an icon of a user completely filled in with the blue, informational color"
       ></cds-icon>{" "}
-      &nbsp; {localStorage.getItem("prouser")}
+      &nbsp; {localStorage.getItem("name")}
     </header>
   );
 };

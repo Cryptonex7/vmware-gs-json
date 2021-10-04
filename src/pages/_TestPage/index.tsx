@@ -7,7 +7,6 @@ import "@cds/core/button/register.js";
 import { withRouter, RouteComponentProps } from "react-router";
 
 import { ClarityIcons, vmBugInverseIcon } from "@cds/core/icon";
-import { useState } from "react";
 ClarityIcons.addIcons(vmBugInverseIcon);
 
 interface Props extends RouteComponentProps {}
@@ -15,7 +14,7 @@ interface Props extends RouteComponentProps {}
 const TestPage: React.FC<Props> = (props: Props) => {
   return (
     <div className="">
-      <h1>Hello {localStorage.getItem("prouser")}!</h1>{" "}
+      <h1>Hello {localStorage.getItem("name")}!</h1>{" "}
     </div>
   );
 };
