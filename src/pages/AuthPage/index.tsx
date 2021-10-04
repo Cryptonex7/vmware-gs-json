@@ -51,10 +51,11 @@ const AuthPage: React.FC<Props> = (props: Props) => {
             cookiePolicy={"single_host_origin"}
             scope="https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile openid https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.readonly https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/spreadsheets.readonly"
             fetchBasicProfile={true}
-            redirectUri="http://localhost:3000/convert"
+            redirectUri="http://vmware-gs-json.netlify.app/convert"
             accessType="online"
             responseType="permission id_token"
             className="google-login"
+            
           />
         </div>
       </div>
